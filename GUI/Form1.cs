@@ -71,6 +71,15 @@ namespace GUI
             return sticks.ToArray(); 
         }
 
+        private bool speed = false;
+        private bool direction1 = false;
+        private bool direction2 = false;
+        private bool direction3 = false;
+        private bool direction4 = false;
+        private bool direction5 = false;
+        private bool direction6 = false;
+        private bool direction7 = false;
+
         //joystick control mode
         private void stickHandle(Joystick stick, int id)
         {
@@ -104,8 +113,18 @@ namespace GUI
 
                 keyboard_pic.Visible = false;
                 joystick_pic.Visible = true;
-                var a = new WebClient();
-                var aa = a.DownloadString("http://192.168.0.149:1234/direction/6.8");
+                if (!direction1)
+                {
+                    var a = new WebClient();
+                    var aa = a.DownloadString("http://192.168.0.149:1234/direction/6.8");
+                    direction1 = true;
+                    direction2 = false;
+                    direction3 = false;
+                    direction4 = false;
+                    direction5 = false;
+                    direction6 = false;
+                    direction7 = false;
+                }
             }
 
             if (xValue < -50 && xValue > -70 && yValue < -20)
@@ -129,8 +148,18 @@ namespace GUI
                 keyboard_pic.Visible = false;
                 joystick_pic.Visible = true;
 
-                var b = new WebClient();
-                var bb = b.DownloadString("http://192.168.0.149:1234/direction/8");
+                if (!direction2)
+                {
+                    var b = new WebClient();
+                    var bb = b.DownloadString("http://192.168.0.149:1234/direction/8");
+                    direction2 = true;
+                    direction1 = false;
+                    direction3 = false;
+                    direction4 = false;
+                    direction5 = false;
+                    direction6 = false;
+                    direction7 = false;
+                }
             }
 
             if (xValue > 70 && xValue < 100 && yValue < -20)
@@ -154,8 +183,18 @@ namespace GUI
                 keyboard_pic.Visible = false;
                 joystick_pic.Visible = true;
 
-                var c = new WebClient();
-                var cc = c.DownloadString("http://192.168.0.149:1234/direction/5.5");
+                if (!direction3)
+                {
+                    var c = new WebClient();
+                    var cc = c.DownloadString("http://192.168.0.149:1234/direction/5.5");
+                    direction3 = true;
+                    direction1 = false;
+                    direction2 = false;
+                    direction4 = false;
+                    direction5 = false;
+                    direction6 = false;
+                    direction7 = false;
+                }
             }
 
             if (xValue < -70 && xValue > -100 && yValue < -20)
@@ -179,8 +218,18 @@ namespace GUI
                 keyboard_pic.Visible = false;
                 joystick_pic.Visible = true;
 
-                var d = new WebClient();
-                var dd = d.DownloadString("http://192.168.0.149:1234/direction/9.5");
+                if (!direction4)
+                {
+                    var d = new WebClient();
+                    var dd = d.DownloadString("http://192.168.0.149:1234/direction/9.5");
+                    direction4 = true;
+                    direction1 = false;
+                    direction2 = false;
+                    direction3 = false;
+                    direction5 = false;
+                    direction6 = false;
+                    direction7 = false;
+                }
             }
             
             if (yValue > 30 && yValue < 50 && xValue > 20)
@@ -203,8 +252,18 @@ namespace GUI
                 label35.Visible = false;
                 label36.Visible = false;
 
-                var e = new WebClient();
-                var ee = e.DownloadString("http://192.168.0.149:1234/direction/4.5");
+                if (!direction5)
+                {
+                    var e = new WebClient();
+                    var ee = e.DownloadString("http://192.168.0.149:1234/direction/4.5");
+                    direction5 = true;
+                    direction1 = false;
+                    direction2 = false;
+                    direction3 = false;
+                    direction4 = false;
+                    direction6 = false;
+                    direction7 = false;
+                }
             }
             
             if (yValue > 30 && yValue < 50 && xValue < -20)
@@ -228,8 +287,18 @@ namespace GUI
                 keyboard_pic.Visible = false;
                 joystick_pic.Visible = true;
 
-                var f = new WebClient();
-                var ff = f.DownloadString("http://192.168.0.149:1234/direction/10.5");
+                if (!direction6)
+                {
+                    var f = new WebClient();
+                    var ff = f.DownloadString("http://192.168.0.149:1234/direction/10.5");
+                    direction6 = true;
+                    direction1 = false;
+                    direction2 = false;
+                    direction3 = false;
+                    direction4 = false;
+                    direction5 = false;
+                    direction7 = false;
+                }
             }
             
             ///neutral possition
@@ -253,57 +322,86 @@ namespace GUI
                 keyboard_pic.Visible = false;
                 joystick_pic.Visible = true;
 
-                var g = new WebClient();
-                var gg = g.DownloadString("http://192.168.0.149:1234/direction/7.3");
+                if (!direction7)
+                {
+                    var g = new WebClient();
+                    var gg = g.DownloadString("http://192.168.0.149:1234/direction/7.3");
+                    direction7 = true;
+                    direction1 = false;
+                    direction2 = false;
+                    direction3 = false;
+                    direction4 = false;
+                    direction5 = false;
+                    direction6 = false;
+                }
             }
 
             bool[] buttons = state.GetButtons();
+
             if (id == 0)
             {
                 if (buttons[0])
                 {
                     //KeysPressed[0] = 1;
+
                     label13.Visible = true; //enable label for running car
                     label28.Visible = false; //dissable label for stopped car
                     joystick_pic.Image = GUI.Properties.Resources.joystick; // Change the image of the joystick xbox controller
                     keyboard_pic.Visible = false;
                     joystick_pic.Visible = true;
-
-                    if (gear == 1)
+                    while (!speed)
                     {
-                        var h = new WebClient();
-                        var hh = h.DownloadString("http://192.168.0.149:1234/speed/7.26");
-                    }
-                    if (gear == 2)
-                    {
-                        var i = new WebClient();
-                        var ii = i.DownloadString("http://192.168.0.149:1234/speed/7.6");
-                    }
-                    if (gear == 3)
-                    {
-                        var j = new WebClient();
-                        var jj = j.DownloadString("http://192.168.0.149:1234/speed/8");
-                    }
-                    if (gear == 4)
-                    {
-                        var k = new WebClient();
-                        var kk = k.DownloadString("http://192.168.0.149:1234/speed/8.5");
-                    }
-                    if (gear == 5)
-                    {
-                        var l = new WebClient();
-                        var ll = l.DownloadString("http://192.168.0.149:1234/speed/9.5");
+                        if (gear == 1)
+                        {
+                            var h = new WebClient();
+                            var hh = h.DownloadString("http://192.168.0.149:1234/speed/7.05");
+                            speed = true;
+                        }
+                    
+                        if (gear == 2)
+                        {
+                            var i = new WebClient();
+                            var ii = i.DownloadString("http://192.168.0.149:1234/speed/7.6");
+                            speed = true;
+                        }
+                    
+                        if (gear == 3)
+                        {
+                            var j = new WebClient();
+                            var jj = j.DownloadString("http://192.168.0.149:1234/speed/8");
+                            speed = true;
+                        }
+                    
+                        if (gear == 4)
+                        {
+                            var k = new WebClient();
+                            var kk = k.DownloadString("http://192.168.0.149:1234/speed/8.5");
+                            speed = true;
+                        }
+                    
+                        if (gear == 5)
+                        {
+                            var l = new WebClient();
+                            var ll = l.DownloadString("http://192.168.0.149:1234/speed/9.5");
+                            speed = true;
+                        }
                     }
                 }
+                
 
 
                 if (!buttons[0])
                 {
                     //KeysPressed[0] = 0;
+                     
                     label13.Visible = false; //dissable label for running car
                     label28.Visible = true; //enable label for stopped car
-                    var m = new WebClient();
-                    var mm = m.DownloadString("http://192.168.0.149:1234/speed/6.8");
+                    while (speed)
+                    {
+                        var m = new WebClient();
+                        var mm = m.DownloadString("http://192.168.0.149:1234/speed/6.8");
+                        speed = false;
+                    }
                 }
 
                 if (buttons[1])
@@ -540,9 +638,9 @@ namespace GUI
             lManualGearValue.Text = gear.ToString(); // Write the initial gear value
 
             var client = new WebClient();
-            var content = client.DownloadString("http://192.168.0.149:1234/speed/6.8");
-            var a = new WebClient();          
-            var aa = a.DownloadString("http://192.168.0.149:1234/direction/7.3");
+            var content = client.DownloadString("http://192.168.0.149:1234/start");
+           // var a = new WebClient();          
+           // var aa = a.DownloadString("http://192.168.0.149:1234/direction/7.3");
         }
 
         private void bManualStop_Click(object sender, EventArgs e)
@@ -570,9 +668,9 @@ namespace GUI
             lManualGearValue.Text = "-"; // Write the "-" symbol in gear value label
 
             var client = new WebClient();
-            var content = client.DownloadString("http://192.168.0.149:1234/speed/6.8");
-            var p = new WebClient();
-            var pp = p.DownloadString("http://192.168.0.149:1234/direction/7.3");
+            var content = client.DownloadString("http://192.168.0.149:1234/stop");
+            //var p = new WebClient();
+            //var pp = p.DownloadString("http://192.168.0.149:1234/direction/7.3");
         }
 
         private void lManualControlsEnumUpdate()
